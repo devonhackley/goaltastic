@@ -40,7 +40,13 @@ describe.only('Testing user model', function(){
 
     it('should return a user', (done) => {
       superagent.delete(`${baseURL}/api/user/${this.tempUser._id.toString()}`)
-    })
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then((res) => {
+        expect(res.status).to.equal(204);
+        done();
+      })
+      .catch(done);
+    });
   });
 
 });
