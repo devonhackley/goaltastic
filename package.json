@@ -34,7 +34,9 @@
     "http-errors": "^1.5.1",
     "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.8.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "ngrok": "^2.2.6",
+    "twilio": "^2.11.1"
   },
   "devDependencies": {
     "aws-sdk-mock": "^1.6.1",
