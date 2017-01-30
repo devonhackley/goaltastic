@@ -5,7 +5,7 @@ const jsonParser = require('body-parser').json();
 const createError = require('http-errors');
 const debug = require('debug')('goaltastic:goal_router');
 const Goal = require('../model/goal');
-const bearerAuth = require('../lib/bear_auth');
+const bearerAuth = require('../lib/bear-auth');
 const goalRouter = module.exports = new Router();
 
 goalRouter.post('/api/goals', bearerAuth, jsonParser,  function(req, res, next){
