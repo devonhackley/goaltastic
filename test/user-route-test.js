@@ -26,13 +26,27 @@ describe.only('Testing user model', function(){
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
         expect(res.status).to.equal(200);
-        // expect(res.body.username).to.equal(this.tempUser.username);
+        expect(res.body.username).to.equal(this.tempUser.username);
         expect(Boolean(res.body._id)).to.equal(true);
         done();
       })
       .catch(done);
     });
 
+  });
+
+  describe('Testing DELETE /api/user/:id', function(){
+    before(userMocks.bind(this));
+
+    it('should return a user', (done) => {
+      superagent.delete(`${baseURL}/api/user/${this.tempUser._id.toString()}`)
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then((res) => {
+        expect(res.status).to.equal(204);
+        done();
+      })
+      .catch(done);
+    });
   });
 
 });
