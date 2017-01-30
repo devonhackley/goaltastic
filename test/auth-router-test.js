@@ -25,7 +25,7 @@ describe('testing auth-router', function(){
         username: 'goaltastic',
         email: 'goaltastic@goaltastic.com',
         password: '1234',
-        phone: '5555555555',
+        phone: '1234567890',
       })
       .then(res => {
         console.log('token: ', res.text);
