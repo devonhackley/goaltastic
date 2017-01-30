@@ -1,11 +1,48 @@
 'use strict';
-const http = require('http');
-const PORT = process.env.PORT || 3000;
 
+require('dotenv').load();
 
+const morgan = require('morgan');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const express = require('express');
+const debug = require('debug')('goaltastic:server');
 
-const server = http.createServer();
+const app = express();
 
-server.listen(PORT, () => {
-  console.log('Server is up!');
+mongoose.Promise = require('bluebird');
+mongoose.connect(process.env.MONGODB_URI);
+
+app.use(morgan('dev'));
+app.use(cors());
+
+// app.use(require('./routes/user-route.js'));
+// app.use(require('./routes/goal-route.js'));
+// app.use(require('./routes/milestone-route.js'));
+// app.use(require('./routes/task-route.js'));
+
+app.use(function(err,req,res,next){
+  debug('error middleware');
+  console.log(err.message);
+  if(err.status){
+    return res.sendStatus(err.status);
+  }
+
+  if(err.name === 'ValidationError'){
+    return res.sendStatus(400);
+  }
+
+  if(err.message.startsWith('E11000 duplicate key')){
+    return res.sendStatus(409);
+  }
+
+  res.sendStatus(500);
+  next();
 });
+
+const server = app.listen(process.env.PORT, () => {
+  console.log('Server is up! Party at port: ', process.env.PORT);
+});
+
+server.isOn = true;
+module.exports = server;
