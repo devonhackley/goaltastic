@@ -9,7 +9,7 @@ const serverControl = require('./lib/server-control.js');
 
 const baseURL = `http://localhost:${process.env.PORT}`;
 
-describe('testing auth-router', function(){
+describe.only('testing auth-router', function(){
   before(serverControl.startServer);
   after(serverControl.killServer);
   afterEach((done) => {
@@ -25,10 +25,10 @@ describe('testing auth-router', function(){
         username: 'goaltastic',
         email: 'goaltastic@goaltastic.com',
         password: '1234',
-        phone: '1234567890',
+        phone: 1234567890,
       })
       .then(res => {
-        // console.log('token: ', res.text);
+        console.log('token: ', res.text);
         expect(res.status).to.equal(200);
         expect(Boolean(res.text)).to.equal(true);
         done();

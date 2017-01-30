@@ -7,11 +7,11 @@ const debug = require('debug')('goaltastic: auth-router');
 
 const basicAuthMiddleware = require('../lib/basic-auth.js');
 
-const userRouter = module.exports = new Router();
+const authRouter = module.exports = new Router();
 
-userRouter.post('/api/signup', jsonParser, function(req, res, next){
+authRouter.post('/api/signup', jsonParser, function(req, res, next){
   debug('POST /api/signup');
-
+  console.log('lulwat', req.body);
   let password = req.body.password;
   delete req.body.password;
   new User(req.body)
@@ -23,7 +23,7 @@ userRouter.post('/api/signup', jsonParser, function(req, res, next){
   .catch(next);
 });
 
-userRouter.get('/api/login', basicAuthMiddleware,  function(req, res, next){
+authRouter.get('/api/login', basicAuthMiddleware,  function(req, res, next){
   debug('GET /api/login');
   console.log(req.user, 'RANDOM STRING');
   req.user.generateToken()

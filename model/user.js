@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password:{type:String, required:true},
   email:{type:String, required:true, unique:true},
-  phone:{type:Number, required:true, min:10, max:10, trim:true},
+  phone:{type:Number, required:true},
   photo_id:{type:Number},
   findHash:{type:String, unique:true},
 });

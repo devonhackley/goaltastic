@@ -10,20 +10,20 @@ const debug = require('debug')('goaltastic:server');
 
 const app = express();
 
-mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.MONGODB_URI);
+mongoose.Promise = global.Promise;
 
 app.use(morgan('dev'));
 app.use(cors());
 
-// app.use(require('./routes/user-route.js'));
+app.use(require('./routes/auth-router.js'));
 // app.use(require('./routes/goal-route.js'));
 // app.use(require('./routes/milestone-route.js'));
 // app.use(require('./routes/task-route.js'));
 
 app.use(function(err,req,res,next){
   debug('error middleware');
-  console.log(err.message);
+  console.log(err);
   if(err.status){
     return res.sendStatus(err.status);
   }
