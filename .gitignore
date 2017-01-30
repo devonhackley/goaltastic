@@ -1,5 +1,6 @@
 # App Ignores
 .env
+db
 
 
 ### Node ###
