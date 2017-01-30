@@ -9,11 +9,11 @@ module.exports = function(done){
   new User({
     username: 'fake' + Math.random(),
     email: 'fakep@email.com' + Math.random(),
-    password: '111',
+    password: '1234',
     phone: 2064952090,
 
   })
-  .generatePasswordHash('111')
+  .generatePasswordHash('1234')
   .then(user => user.save())
   .then(user => {
     this.tempUser = user;
