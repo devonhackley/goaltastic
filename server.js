@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 app.use(require('./routes/auth-router.js'));
+app.use(require('./routes/user-route.js'));
 // app.use(require('./routes/goal-route.js'));
 // app.use(require('./routes/milestone-route.js'));
 // app.use(require('./routes/task-route.js'));

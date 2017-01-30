@@ -9,7 +9,7 @@ const serverControl = require('./lib/server-control.js');
 
 const baseURL = `http://localhost:${process.env.PORT}`;
 
-describe.only('testing auth-router', function(){
+describe('testing auth-router', function(){
   before(serverControl.startServer);
   after(serverControl.killServer);
   afterEach((done) => {
