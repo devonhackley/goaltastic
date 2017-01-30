@@ -2,7 +2,7 @@
 
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const createError = require('https-errors');
+const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const debug = require('debug');
@@ -34,7 +34,7 @@ userSchema.methods.comparePasswordHash = function(password){
     bcrypt.compare(password, this.password, (err, valid) => {
       if(err) return reject(err);
       if(!valid) return reject(createError(401, 'please input the correct passwords'));
-      resolve(this); 
+      resolve(this);
     });
   });
 };
