@@ -1,0 +1,46 @@
+{
+  "name": "goaltastic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "engines": {
+    "node": "6.9.2"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node server.js",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "debug": "DEBUG=goaltastic* npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devonhackley/goaltastic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devonhackley/goaltastic/issues"
+  },
+  "homepage": "https://github.com/devonhackley/goaltastic#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
+    "debug": "^2.6.0",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.1",
+    "http-errors": "^1.5.1",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.8.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^1.6.1",
+    "chai": "^3.5.0",
+    "eslint": "^3.14.1",
+    "mocha": "^3.2.0",
+    "superagent": "^3.4.1"
+  }
+}
