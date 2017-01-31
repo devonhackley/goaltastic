@@ -32,8 +32,8 @@ describe('Testing user model', function(){
       })
       .catch(done);
     });
-
   });
+  
 
   describe('Testing DELETE /api/user/:id', function(){
     before(userMocks.bind(this));
