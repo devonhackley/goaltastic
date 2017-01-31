@@ -3,10 +3,8 @@
 require('./mock-env');
 const expect = require('chai').expect;
 const superagent = require('superagent');
-const User = require('../model/user');
 const Task = require('../model/task');
 const Goal = require('../model/goal');
-const userMocks = require('./lib/user-mocks');
 const taskMocks = require('./lib/task-mocks');
 const goalMocks = require('./lib/goal-mocks');
 const serverControl = require('./lib/server-control.js');
@@ -18,6 +16,11 @@ describe.only('testing task-router', function(){
   after(serverControl.killServer);
   afterEach((done) => {
     Task.remove({})
+  after((done) => {
+    Promise.all([
+      Task.remove({}),
+      Goal.remove({}),
+    ])
     .then(() => done())
     .catch(done);
   });
@@ -26,6 +29,8 @@ describe.only('testing task-router', function(){
     beforeEach(taskMocks.bind(this));
     it('should respond with a tasks', (done) => {
       console.log(this.tempToken);
+    before(goalMocks.bind(this));
+    it('should respond with a task', (done) => {
       superagent.post(`${baseURL}/api/tasks`)
       .send({ title:'example tasks', completion: false })
       .set('Authorization', `Bearer ${this.tempToken}`)
