@@ -15,6 +15,7 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
     return next(createError(400, 'requires title'));
   new Task({
     title: req.body.title,
+    completion:false,
     goalID: req.goal._id.toString(),
   }).save()
   .then(task => res.json(task))
@@ -24,11 +25,18 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
 taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   debug('GET /api/tasks/:id');
   Task.findOne({
-    goalID: req.goal._id.toString(),
+    taskID: req.task._id.toString(),
     _id: req.params.id,
   })
   .then(task => res.json(task))
   .catch(err => {
     if(err) return next(createError(404, 'didn\'t find the task'));
   });
+});
+
+taskRouter.delete('/api/tasks/:id', bearerAuth, function(req,res,next){
+  debug('DELETE /api/tasks/:id');
+  Task.findByIdAndRemove(req.params.id)
+  .then(() => res.sendStatus(204))
+  .catch(err => next(createError(404, err.message)));
 });
