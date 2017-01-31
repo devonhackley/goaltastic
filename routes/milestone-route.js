@@ -14,7 +14,7 @@ mileStoneRouter.post('/api/milestones', bearerAuth, jsonParser,  function(req, r
     return next(createError(400, 'requires title'));
   new Milestone({
     title: req.body.title,
-    userID: req.user._id.toString(),
+    goalID: req.goal._id.toString(),
   }).save()
   .then(mileStone => res.json(mileStone))
   .catch(next);
@@ -23,7 +23,7 @@ mileStoneRouter.post('/api/milestones', bearerAuth, jsonParser,  function(req, r
 mileStoneRouter.delete('/api/mileStones/:id', bearerAuth, function(req, res, next){
   debug('DELETE /api/mileStones/:id');
   Milestone.findByIdAndRemove({
-    userID: req.user._id.toString(),
+    goalID: req.goal._id.toString(),
     _id: req.params.id,
   })
   .populate('mileStones')
