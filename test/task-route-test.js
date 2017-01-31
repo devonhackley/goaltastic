@@ -3,10 +3,8 @@
 require('./mock-env');
 const expect = require('chai').expect;
 const superagent = require('superagent');
-const User = require('../model/user');
 const Task = require('../model/task');
 const Goal = require('../model/goal');
-const userMocks = require('./lib/user-mocks');
 const taskMocks = require('./lib/task-mocks');
 const goalMocks = require('./lib/goal-mocks');
 const serverControl = require('./lib/server-control.js');
@@ -18,7 +16,6 @@ describe.only('testing task_router', function(){
   after(serverControl.killServer);
   after((done) => {
     Promise.all([
-      User.remove({}),
       Task.remove({}),
       Goal.remove({}),
     ])
@@ -26,7 +23,6 @@ describe.only('testing task_router', function(){
     .catch(done);
   });
   describe('testing POST /api/tasks', function(){
-    before(userMocks.bind(this));
     before(goalMocks.bind(this));
     it('should respond with a task', (done) => {
       superagent.post(`${baseURL}/api/tasks`)
