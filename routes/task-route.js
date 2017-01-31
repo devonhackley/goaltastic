@@ -15,7 +15,7 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
     return next(createError(400, 'requires title'));
   new Task({
     title: req.body.title,
-    milestoneID: req.milestone._id.toString(),
+    goalID: req.goal._id.toString(),
   }).save()
   .then(task => res.json(task))
   .catch(next);
@@ -24,7 +24,7 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
 taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   debug('GET /api/tasks/:id');
   Task.findOne({
-    milestoneID: req.milestone._id.toString(),
+    goalID: req.goal._id.toString(),
     _id: req.params.id,
   })
   .then(task => res.json(task))
