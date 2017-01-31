@@ -9,7 +9,7 @@ const bearerAuth = require('../lib/bear-auth');
 const goalRouter = module.exports = new Router();
 
 goalRouter.post('/api/goals', bearerAuth, jsonParser,  function(req, res, next){
-  debug('POST /api/goal');
+  debug('POST /api/goals');
   if(!req.body.title)
     return next(createError(400, 'requires title'));
   new Goal({
@@ -26,7 +26,6 @@ goalRouter.get('/api/goals/:id', bearerAuth, function(req, res, next){
     userID: req.user._id.toString(),
     _id: req.params.id,
   })
-  .populate('goals')
   .then(goal => res.json(goal))
   .catch(err => {
     if(err) return next(createError(404, 'didn\'t find the goal'));
