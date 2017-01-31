@@ -25,7 +25,7 @@ describe('testing milestone_router', function(){
   describe('testing POST /api/mileStones', function(){
     before(mockUser.bind(this));
 
-    it('should respond with a goal', (done) => {
+    it('should respond with a Milestone', (done) => {
       superagent.post(`${baseURL}/api/mileStones`)
       .send({ title: 'testMileStone' })
       .set('Authorization', `Bearer ${this.tempToken}`)
@@ -44,19 +44,19 @@ describe('testing milestone_router', function(){
     beforeEach(mockMileStone.bind(this));
 
     it('should respond with a milestone', (done) => {
-      let url = `${baseURL}/api/gallery/${this.tempMileStone._id.toString()}`;
+      let url = `${baseURL}/api/mileStones/${this.tempMileStone._id.toString()}`;
       superagent.post(url)
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
         expect(res.status).to.equal(200);
-        expect(res.body.title).to.equal(this.tempGoal.title);
+        expect(res.body.title).to.equal(this.tempMileStone.title);
         expect(res.body.userID).to.equal(this.tempUser._id.toString());
         done();
       })
       .catch(done);
     });
     it('should respond with 401', (done) => {
-      let url = `${baseURL}/api/gallery/${this.tempGoal._id.toString()}`;
+      let url = `${baseURL}/api/mileStones/${this.tempMilestone._id.toString()}`;
       superagent.get(url)
       .set('Authorization', `Bearer badtoken`)
       .then(done)
