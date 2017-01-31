@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const taskSchema = mongoose.Schema({
   title: {type:String, required:true},
   completion: {type:Boolean, default:false},
-  // milestoneID: [{type: mongoose.Schema.Types.ObjectId, required: true}],
+  goalID: [{type: mongoose.Schema.Types.ObjectId, ref:'goal'}],
 });
 
 module.exports = mongoose.model('task', taskSchema);
