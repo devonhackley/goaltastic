@@ -8,7 +8,7 @@ const userMocks = require('./lib/user-mocks.js');
 const baseURL = `http://localhost:${process.env.PORT}`;
 const User = require('../model/user.js');
 
-describe.only('Testing user model', function(){
+describe('Testing user model', function(){
 
   before(serverControl.startServer);
   after(serverControl.killServer);
