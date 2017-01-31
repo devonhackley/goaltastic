@@ -13,7 +13,6 @@ const userSchema = mongoose.Schema({
   password:{type:String, required:true},
   email:{type:String, required:true, unique:true},
   phone:{type:Number, required:true},
-  photo_id:{type:Number},
   findHash:{type:String, unique:true},
 });
 
