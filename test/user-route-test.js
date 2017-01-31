@@ -32,7 +32,7 @@ describe.only('Testing user model', function(){
       })
       .catch(done);
     });
-
   });
+  
 
 });
