@@ -1,7 +1,7 @@
 'use strict';
 
 const debug = require('debug')('goaltastic:goal-mocks');
-const Goal = require('../../model/goal');
+const Goal = require('../../model/goal.js');
 
 module.exports = function(done){
   debug('goal-mocks');
