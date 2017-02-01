@@ -33,3 +33,12 @@ profileRouter.get('/api/profile/:id', bearerAuth, function(req, res, next){
     if(err) return next(createError(404, 'didn\'t find the profile'));
   });
 });
+profileRouter.delete('/api/profile/:id', bearerAuth, function(req, res, next) {
+  debug('DELETE /api/profile/:id');
+  Profile.findOneAndRemove({
+    userID: req.user._id.toString(),
+    _id: req.params.id,
+  })
+  .then(() => res.sendStatus(204))
+ .catch(next);
+});
