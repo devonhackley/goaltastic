@@ -8,12 +8,12 @@ const client =require('twilio')(accountSid, authToken);
 
 module.exports = exports = {};
 
-exports.twilo = function(){
+exports.twilo = function(phone, message){
   console.log(client.messages);
   client.messages.create({
     to: '+12066592953',
     from: '+15612796948',
-    body: 'Hey Devon!',
+    body: message,
   }, function(err, message) {
     console.log(err, message);
   });
