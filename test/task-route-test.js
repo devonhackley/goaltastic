@@ -71,6 +71,7 @@ describe('testing task_router', function(){
     beforeEach(taskMocks.bind(this));
 
     it('should respond with a tasks', (done) => {
+      console.log('ham');
       let url = `${baseURL}/api/tasks/${this.tempTask._id.toString()}`;
       superagent.get(url)
       .set('Authorization', `Bearer ${this.tempToken}`)
