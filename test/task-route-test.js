@@ -11,7 +11,7 @@ const serverControl = require('./lib/server-control.js');
 
 const baseURL = `http://localhost:${process.env.PORT}`;
 
-describe.only('testing task_router', function(){
+describe('testing task_router', function(){
   before(serverControl.startServer);
   after(serverControl.killServer);
   after((done) => {
