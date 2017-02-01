@@ -3,9 +3,7 @@
 require('./mock-env');
 const expect = require('chai').expect;
 const superagent = require('superagent');
-const User = require('../model/user');
 const Task = require('../model/task');
-const Goal = require('../model/goal');
 const userMocks = require('./lib/user-mocks');
 const taskMocks = require('./lib/task-mocks');
 const goalMocks = require('./lib/goal-mocks');
