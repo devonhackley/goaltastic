@@ -6,3 +6,5 @@ process.env.APP_SECRET = 'asdasdasdsa';
 process.env.AWS_BUCKET= 'testBucket';
 process.env.AWS_ACCESS_KEY_ID = 'fakeID';
 process.env.AWS_SECRET_ACCESS_KEY = 'fakeKey';
+
+require('./lib/AWS-mocks');

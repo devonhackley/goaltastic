@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Profile = require('../model/profile');
 const del = require('del');
 
-const s3 = new AWS();
+const s3 = new AWS.S3();
 
 const PhotoSchema = mongoose.Schema({
   title: {type: String, required: true},
@@ -18,7 +18,7 @@ const PhotoSchema = mongoose.Schema({
 PhotoSchema.pre('save', function(next) {
   Profile.findById(this.profileID)
     .then(profile => {
-      profile.photos.push(this._id.toString());
+      profile.photo.push(this._id.toString());
       return profile.save();
     })
     .then(() => next())
@@ -31,8 +31,8 @@ PhotoSchema.post('save', function(doc, next) {
 PhotoSchema.pre('remove', function(next) {
   Profile.findById(this.profileID)
     .then(profile => {
-      profile.photos = profile.photos.filter(photoID => {
-        return photoID != this._id.toString();
+      profile.photos = profile.photos.filter(photo => {
+        return photo != this._id.toString();
       });
       return profile.save();
     })
