@@ -17,12 +17,13 @@ app.use(morgan('dev'));
 app.use(cors());
 
 app.use(require('./routes/auth-router.js'));
-
 app.use(require('./routes/goal-route.js'));
-
 app.use(require('./routes/user-route.js'));
 
+app.use(require('./routes/profile-route.js'));
+app.use(require('./routes/photo-route.js'));
 app.use(require('./routes/task-route.js'));
+
 
 app.use(function(err,req,res,next){
   debug('error middleware');
