@@ -42,9 +42,9 @@ describe('testing profile_router', function(){
   });
 
   describe('testing GET /api/profile/:id', function(){
-    beforeEach(mockUser.bind(this));
-    beforeEach(mockProfile.bind(this));
-    beforeEach(mockPhoto.bind(this));
+    before(mockUser.bind(this));
+    before(mockProfile.bind(this));
+    before(mockPhoto.bind(this));
 
     it('should respond with a profile', (done) => {
       let url = `${baseURL}/api/profile/${this.tempProfile._id.toString()}`;
@@ -62,16 +62,6 @@ describe('testing profile_router', function(){
       let url = `${baseURL}/api/profile/${this.tempProfile._id.toString()}`;
       superagent.get(url)
       .set('Authorization', `Bearer badtoken`)
-      .then(done)
-      .catch(res => {
-        expect(res.status).to.equal(401);
-        done();
-      })
-      .catch(done);
-    });
-    it('should respond with 401', (done) => {
-      let url = `${baseURL}/api/profile/${this.tempProfile._id.toString()}`;
-      superagent.get(url)
       .then(done)
       .catch(res => {
         expect(res.status).to.equal(401);

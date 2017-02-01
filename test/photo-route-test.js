@@ -14,7 +14,7 @@ const controlServ = require('./lib/server-control');
 
 const baseURL = `http://localhost:${process.env.PORT}`;
 
-describe.only('testing photo_router', function() {
+describe('testing photo_router', function() {
   before(controlServ.startServer);
   after(controlServ.killServer);
   afterEach((done) => {
@@ -25,12 +25,12 @@ describe.only('testing photo_router', function() {
     .then(() => done())
     .catch(done);
   });
-  describe('testing POST /api/photo', function(){
-    beforeEach(mockUser.bind(this));
-    beforeEach(mockProfile.bind(this));
+  describe('testing POST /api/photos', function(){
+    before(mockUser.bind(this));
+    before(mockProfile.bind(this));
 
     it('should return an photo model', (done) => {
-      superagent.post(`${baseURL}/api/photo`)
+      superagent.post(`${baseURL}/api/photos`)
       .set('Authorization', `Bearer ${this.tempToken}`)
       .field('title', 'Bernie_wwf')
       .field('profileID', this.tempProfile._id.toString())
@@ -43,6 +43,7 @@ describe.only('testing photo_router', function() {
         expect(res.body.profileID).to.equal(this.tempProfile._id.toString());
         expect(res.body.userID).to.equal(this.tempUser._id.toString());
         expect(Boolean(res.body.photoURI)).to.equal(true);
+
         done();
       })
       .catch(done);

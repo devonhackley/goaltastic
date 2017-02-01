@@ -26,10 +26,8 @@ function s3Upload(params) {
 
 photoRouter.post('/api/photos', bearerAuth, upload.single('file'), function(req, res, next) {
   debug('POST /api/photos');
-  let tempProfile;
   Profile.findOne({_id: req.body.profileID, userID: req.user_id})
-  .then((profile) => {
-    tempProfile = profile;
+  .then(() => {
     return s3Upload({
       ACL: 'public-read',
       Bucket: process.env.AWS_BUCKET,
@@ -41,7 +39,7 @@ photoRouter.post('/api/photos', bearerAuth, upload.single('file'), function(req,
   return new Photo({
     title: req.body.title,
     profileID: req.body.profileID,
-    userID: req.body.user._id.toString(),
+    userID: req.user._id.toString(),
     awsKey: s3Data.Key,
     photoURI: s3Data.Location,
   }).save();
