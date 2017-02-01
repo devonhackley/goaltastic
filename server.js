@@ -23,6 +23,7 @@ app.use(require('./routes/user-route.js'));
 app.use(require('./routes/profile-route.js'));
 app.use(require('./routes/photo-route.js'));
 app.use(require('./routes/task-route.js'));
+app.use(require('./bin/twilobot.js'))
 
 
 app.use(function(err,req,res,next){

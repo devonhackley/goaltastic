@@ -70,7 +70,7 @@ describe('testing task_router', function(){
     beforeEach(goalMocks.bind(this));
     beforeEach(taskMocks.bind(this));
 
-    it('should respond with a tasks', (done) => {
+    it.only('should respond with a tasks', (done) => {
       let url = `${baseURL}/api/tasks/${this.tempTask._id.toString()}`;
       superagent.get(url)
       .set('Authorization', `Bearer ${this.tempToken}`)
