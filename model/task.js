@@ -22,6 +22,4 @@ taskSchema.pre('save', function(next){
   .catch(next);
 });
 
-});
-
 module.exports = mongoose.model('task', taskSchema);
