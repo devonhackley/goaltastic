@@ -1,7 +1,7 @@
 'use strict';
 
 const debug = require('debug')('goaltastic:task-mocks');
-const Task = require('../../model/task');
+const Task = require('../../model/task.js');
 
 module.exports = function(done){
   debug('task-mocks');
@@ -12,6 +12,7 @@ module.exports = function(done){
   }).save()
   .then(task => {
     this.tempTask = task;
+    console.log('this.tempTask====>', this.tempTask);
     done();
   })
   .catch(done);

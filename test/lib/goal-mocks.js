@@ -1,7 +1,7 @@
 'use strict';
 
 const debug = require('debug')('goaltastic:goal-mocks');
-const Goal = require('../../model/goal');
+const Goal = require('../../model/goal.js');
 
 module.exports = function(done){
   debug('goal-mocks');
@@ -9,7 +9,7 @@ module.exports = function(done){
     title:  'test' + Math.floor(Math.random() * 100),
     start: Date.now(),
     userID: this.tempUser._id.toString(),
-    // milestoneID: this.tempMilestone._id.toString(),
+    // taskID: null,
   }).save()
   .then(goal => {
     this.tempGoal = goal;
