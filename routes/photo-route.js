@@ -54,6 +54,6 @@ photoRouter.delete('/api/photos/:id', bearerAuth, function(req, res, next) {
     userID: req.user._id.toString(),
     _id: req.params.id,
   })
-  .then(() => next())
+  .then(() => res.sendStatus(204))
   .catch(next);
 });
