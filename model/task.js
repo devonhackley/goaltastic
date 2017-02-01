@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+
 const Goal = require('./goal.js');
 const taskSchema = mongoose.Schema({
   title: {type:String, required:true},
@@ -19,6 +20,8 @@ taskSchema.pre('save', function(next){
   })
   .then(() => next())
   .catch(next);
+});
+
 });
 
 module.exports = mongoose.model('task', taskSchema);
