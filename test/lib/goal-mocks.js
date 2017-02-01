@@ -9,7 +9,6 @@ module.exports = function(done){
     title:  'test' + Math.floor(Math.random() * 100),
     start: Date.now(),
     userID: this.tempUser._id.toString(),
-    // taskID: null,
   }).save()
   .then(goal => {
     this.tempGoal = goal;
