@@ -26,10 +26,13 @@ describe('testing task_router', function(){
     before(goalMocks.bind(this));
 
     it('should respond with a tasks', (done) => {
+      let example = { title:'example tasks', completion: false, userID: this.tempUser._id.toString(), goalID: this.tempGoal._id.toString() };
+      console.log('Exxxxxxxxxxxxxxxxxxxxxxx', example);
       superagent.post(`${baseURL}/api/tasks`)
-      .send({ title:'example tasks', completion: false, userID: this.tempUser._id.toString(), goalID: this.tempGoal._id.toString() })
+      .send(example)
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
+        console.log('sasdsadasdasdasdasdasdasdasdasdasdsd', res.status, res.body);
         expect(res.status).to.equal(200);
         expect(res.body.title).to.equal('example tasks');
         expect(res.body.completion).to.equal(false);
