@@ -1,5 +1,5 @@
 # Goaltastic
-
+[![Coverage Status](https://coveralls.io/repos/github/devonhackley/goaltastic/badge.svg?branch=master)](https://coveralls.io/github/devonhackley/goaltastic?branch=master)
 ## Description
 A REST API for where users can make **POST**, **GET**, **PUT**, and **DELETE** requests to `/api/users` This lab we use **MongoDB** with **Mongoose.js**.
 
