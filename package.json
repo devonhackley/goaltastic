@@ -7,7 +7,8 @@
     "node": "6.9.2"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls ",
     "start": "node server.js",
     "lint": "./node_modules/eslint/bin/eslint.js .",
     "debug": "DEBUG=goaltastic* npm run test"

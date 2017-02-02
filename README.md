@@ -1,4 +1,6 @@
 # Goaltastic
+[![Coverage Status](https://coveralls.io/repos/github/devonhackley/goaltastic/badge.svg?branch=master)](https://coveralls.io/github/devonhackley/goaltastic?branch=master)
+=======
 [![Build Status](https://travis-ci.org/devonhackley/goaltastic.svg?branch=master)](https://travis-ci.org/devonhackley/goaltastic)
 
 ## Description

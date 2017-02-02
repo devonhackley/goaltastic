@@ -1,4 +1,6 @@
 # App Ignores
+coverage
+html-reporter
 .env
 db
 
