@@ -6,7 +6,7 @@ const createError = require('http-errors');
 const debug = require('debug')('goaltastic:goal_router');
 const Task = require('../model/task.js');
 const bearerAuth = require('../lib/bear-auth.js');
-const Twilobot = require ('../bin/twilobot.js');
+
 
 const taskRouter = module.exports = new Router();
 
@@ -36,13 +36,6 @@ taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
     if(err) return next(createError(404, 'didn\'t find the task'));
   });
 });
-
-taskRouter.get('/api/tasks/text/:id', bearerAuth, function(req,res,next){
-  debug('GET /api/tasks/:id');
-  Twilobot(req, res, next);
-});
-
-
 
 taskRouter.delete('/api/tasks/:id', bearerAuth, function(req,res,next){
   debug('DELETE /api/tasks/:id');

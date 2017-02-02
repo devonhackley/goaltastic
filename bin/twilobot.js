@@ -8,17 +8,17 @@ const Task = require('../model/task.js');
 const User = require('../model/user.js');
 const Twilo = require('../model/twillo.js');
 
-
 const twilobot = module.exports = function () {
-  Task.find({})
-  .then(  (tasks) => {
+  Task.find({completion: false})
+  .then((tasks) => {
     console.log('boyyyaaaaaaaaaaaaaaaaaaaaaaaaaaaa', tasks);
     tasks.forEach( function (task){
       User.findById(task.userID)
       .then((user) => {
         console.log(task);
-        Twilo.twilo('+1' + user.phone,task.title);
-        mongoose.disconnect();
+        Twilo.twilo('+1' + user.phone, task.title, function(err, data){
+          mongoose.disconnect();
+        });
       });
     });
   });
