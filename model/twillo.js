@@ -15,7 +15,7 @@ exports.twilo = function(phone, message, callback){
     from: '+15612796948',
     body: message,
   }, function(err, message) {
-    callback(err, message);;
+    callback(err, message);
   });
 
 };
