@@ -8,10 +8,10 @@
   },
   "scripts": {
     "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls ",
-    "start": "node server.js",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "debug": "DEBUG=goaltastic* npm run test",
     "lint": "./node_modules/eslint/bin/eslint.js .",
-    "debug": "DEBUG=goaltastic* npm run test"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
