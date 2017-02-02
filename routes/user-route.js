@@ -10,8 +10,6 @@ const userRouter = module.exports = new Router();
 
 userRouter.get('/api/user/:id', bearerAuth, function(req,res,next){
   debug('GET /api/user/:id');
-  // if(!req.body)
-  //   return next(createError(400, 'bad request'));
 
   console.log('lulwhat', req.params.id);
   User.findOne({ _id: req.params.id})
@@ -19,16 +17,6 @@ userRouter.get('/api/user/:id', bearerAuth, function(req,res,next){
   .catch(err => next(createError(404, err.message)));
 
 });
-
-// userRouter.get('/api/users', bearerAuth, function(req,res,next){
-//   debug('GET /api/users');
-//
-//   User.find(req.params.id)
-//   .then(user => res.json(user))
-//   .catch(err => next(createError(404, err.message)));
-//
-//
-// });
 
 userRouter.delete('/api/user/:id', bearerAuth, function(req,res,next){
   debug('DELETE /api/user/:id');
