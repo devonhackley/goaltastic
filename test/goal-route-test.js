@@ -36,6 +36,43 @@ describe('testing goal_router', function(){
       })
       .catch(done);
     });
+
+    it('should respond with a 400 status code for bad request', (done) => {
+      superagent.post(`${baseURL}/api/goals`)
+      .send({})
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch((err) => {
+        console.log(err.status);
+        expect(err.status).to.equal(400);
+        done();
+      })
+      .catch(done);
+    });
+    it('should respond with a 401 status code for bad request', (done) => {
+      superagent.post(`${baseURL}/api/goals`)
+      .send({title: 'testGoal'})
+      .set('Authorization', `Bearer ${this.tempBlah}`)
+      .then(done)
+      .catch((err) => {
+        console.log(err.status);
+        expect(err.status).to.equal(401);
+        done();
+      })
+      .catch(done);
+    });
+    it('should respond with a 404 status code for bad request', (done) => {
+      superagent.post(`${baseURL}/api/goal`)
+      .send({title: 'testGoal'})
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch((err) => {
+        console.log(err.status);
+        expect(err.status).to.equal(404);
+        done();
+      })
+      .catch(done);
+    });
   });
 
   describe('testing GET /api/goals/:id', function(){
