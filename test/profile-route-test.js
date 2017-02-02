@@ -39,6 +39,17 @@ describe('testing profile_router', function(){
       })
       .catch(done);
     });
+    it('should respond with 400', done => {
+      superagent.post(`${baseURL}/api/profile`)
+      .send({title: ''})
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(400);
+        done();
+      })
+      .catch(done);
+    });
     it('should respond with 401', (done) => {
       let url = `${baseURL}/api/profile/123124`;
       superagent.get(url)
@@ -73,6 +84,27 @@ describe('testing profile_router', function(){
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
         expect(res.status).to.equal(204);
+        done();
+      })
+      .catch(done);
+    });
+    it('should respond with a 401', done => {
+      superagent.delete(`${baseURL}/api/profile/${this.tempPhoto._id.toString()}`)
+      .set('Authorization', `Bearer badtoken`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(401);
+        done();
+      })
+      .catch(done);
+    });
+
+    it('should respond with a 404', done => {
+      superagent.delete(`${baseURL}/api/profile/fakeID`)
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(404);
         done();
       })
       .catch(done);
