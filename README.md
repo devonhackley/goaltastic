@@ -1,5 +1,4 @@
 # Goaltastic
-[![NPM version](http://img.shields.io/npm/v/goaltastic.svg)](https://www.npmjs.com/package/goaltastic)
 [![Build Status](https://travis-ci.org/devonhackley/goaltastic.svg?branch=master)](https://travis-ci.org/devonhackley/goaltastic)
 
 ## Description
@@ -38,6 +37,8 @@ npm start
 - nodemon will serve up port you have identified in your `.env` file.
 
 - Lastly in a third and separate window you can make requests to the api using the following commands:
+
+### To Create a User
 ```
 http POST localhost:3000/api/user name="exampleName" password="examplePW" email="example@email.com" phone="1112223333"
 ```
@@ -58,3 +59,45 @@ http GET :3000/api/users/:id
 ```
 http DELETE :3000/api/users/:id
 ```
+
+### To Create a Goal
+```
+http POST localhost:3000/api/goals title="exampleTitle" start="exampleDate" userID="exampleUserID""
+```
+- The server will respond with a `200 OK` status and return the new item data. Note the unique ID.
+
+- If you get `400 Bad Request` this means you didn't add all the arguments in the CLI.
+
+- To get an array of all the user's goal IDs currently in the data directory, make a **GET** request without an ID query:
+```
+http GET :3000/api/goals
+```
+- To read a goal that exists in the API, make a **GET** request with the unique ID:
+***use the id from the POST request's response***
+```
+http GET :3000/api/goals/:id
+```
+- To delete a user from the API, make a **DELETE** request with the unique ID:
+```
+http DELETE :3000/api/goals/:id
+```
+
+### To Create a Task
+```
+http POST localhost:3000/api/tasks title="exampleTitle" goalID="exampleGoalID""
+```
+- The server will respond with a `200 OK` status and return the new item data. Note the unique ID.
+
+- If you get `400 Bad Request` this means you didn't add all the arguments in the CLI.
+
+- To read a goal that exists in the API, make a **GET** request with the unique ID:
+***use the id from the POST request's response***
+```
+http GET :3000/api/tasks/:id
+```
+- To delete a user from the API, make a **DELETE** request with the unique ID:
+```
+http DELETE :3000/api/tasks/:id
+```
+
+   #### T
