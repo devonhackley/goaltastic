@@ -35,8 +35,6 @@ taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   });
 });
 
-
-
 taskRouter.delete('/api/tasks/:id', bearerAuth, function(req,res,next){
   debug('DELETE /api/tasks/:id');
   Task.findByIdAndRemove(req.params.id)

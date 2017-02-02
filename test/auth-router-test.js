@@ -35,6 +35,19 @@ describe('testing auth-router', function(){
       })
       .catch(done);
     });
+    it('should return a 400 error for bad signup', function(done){
+      superagent.post(`${baseURL}/api/signup`)
+      .send({
+        email: 'goaltastic@goaltastic.com',
+        password: '1235',
+        phone: 1234567890,
+      })
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(400);
+        done();
+      });
+    });
   });
 
   describe('testing GET /api/login', function(){
@@ -49,6 +62,24 @@ describe('testing auth-router', function(){
         done();
       })
       .catch(done);
+    });
+    it('should respond with a 401 error', (done) => {
+      superagent.get(`${baseURL}/api/login`)
+      .auth(this.tempUser.username, '24234234')
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(401);
+        done();
+      });
+    });
+    it('should respond with a 404 error', (done) => {
+      superagent.get(`${baseURL}/api/badlogin`)
+      .auth(this.tempUser.username, '1234')
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(404);
+        done();
+      });
     });
   });
 });
