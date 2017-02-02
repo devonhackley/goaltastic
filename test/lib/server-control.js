@@ -18,6 +18,7 @@ serverControl.startServer = function(done){
 };
 
 serverControl.killServer = function(done){
+  console.log('sommmmmmmeeeeeethaaaaanggggggg');
   if(server.isOn){
     server.close(() => {
       server.isOn = false;

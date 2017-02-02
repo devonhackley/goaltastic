@@ -14,10 +14,10 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
   debug('POST /api/tasks');
   if(!req.body.title)
     return next(createError(400, 'requires title'));
-
   new Task({
     title: req.body.title,
     completion:false,
+    userID: req.user._id.toString(),
     goalID: req.body.goalID,
   }).save()
   .then(task => res.json(task))
@@ -34,6 +34,8 @@ taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
     if(err) return next(createError(404, 'didn\'t find the task'));
   });
 });
+
+
 
 taskRouter.delete('/api/tasks/:id', bearerAuth, function(req,res,next){
   debug('DELETE /api/tasks/:id');

@@ -13,9 +13,13 @@ describe('testing auth-router', function(){
   before(serverControl.startServer);
   after(serverControl.killServer);
   afterEach((done) => {
+    console.log('annnnnnnnnnyyyyyyyyythhhhhhhhhinggggggggggggggggg');
     User.remove({})
     .then(() => done())
-    .catch(done);
+    .catch((err) => {
+      console.log('errrrrrrrr',err);
+      done();
+    });
   });
 
   describe('testing POST /api/signup', function(){
@@ -51,7 +55,7 @@ describe('testing auth-router', function(){
   });
 
   describe('testing GET /api/login', function(){
-    before(userMocks.bind(this));
+    beforeEach(userMocks.bind(this));
 
     it('should respond with a token', (done) => {
       superagent.get(`${baseURL}/api/login`)
@@ -70,7 +74,8 @@ describe('testing auth-router', function(){
       .catch(err => {
         expect(err.status).to.equal(401);
         done();
-      });
+      })
+      .catch(done);
     });
     it('should respond with a 404 error', (done) => {
       superagent.get(`${baseURL}/api/badlogin`)
@@ -79,7 +84,8 @@ describe('testing auth-router', function(){
       .catch(err => {
         expect(err.status).to.equal(404);
         done();
-      });
+      })
+      .catch(done);
     });
   });
 });
