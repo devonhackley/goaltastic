@@ -8,6 +8,7 @@ module.exports = function(done){
   new Task({
     title:  'test' + Math.floor(Math.random() * 100),
     completion: false,
+    userID: this.tempUser._id.toString(),
     goalID: this.tempGoal._id.toString(),
   }).save()
   .then(task => {

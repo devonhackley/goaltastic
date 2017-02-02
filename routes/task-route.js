@@ -7,6 +7,7 @@ const debug = require('debug')('goaltastic:goal_router');
 const Task = require('../model/task.js');
 const bearerAuth = require('../lib/bear-auth.js');
 
+
 const taskRouter = module.exports = new Router();
 
 taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
@@ -34,6 +35,8 @@ taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
     if(err) return next(createError(404, 'didn\'t find the task'));
   });
 });
+
+
 
 taskRouter.delete('/api/tasks/:id', bearerAuth, function(req,res,next){
   debug('DELETE /api/tasks/:id');
