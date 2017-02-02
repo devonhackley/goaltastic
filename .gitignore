@@ -4,7 +4,6 @@ html-reporter
 .env
 db
 
-
 ### Node ###
 # Logs
 logs
