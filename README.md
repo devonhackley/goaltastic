@@ -101,5 +101,3 @@ http GET :3000/api/tasks/:id
 ```
 http DELETE :3000/api/tasks/:id
 ```
-
-   #### T
