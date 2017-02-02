@@ -25,7 +25,7 @@ describe('testing profile_router', function(){
     .catch(done);
   });
   describe('testing POST /api/profile', function(){
-    before(mockUser.bind(this));
+    beforeEach(mockUser.bind(this));
 
     it('should respond with a profile', (done) => {
       superagent.post(`${baseURL}/api/profile`)
@@ -39,12 +39,81 @@ describe('testing profile_router', function(){
       })
       .catch(done);
     });
-  });
+    it('should respond with 400', done => {
+      superagent.post(`${baseURL}/api/profile`)
+      .send({title: ''})
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(400);
+        done();
+      })
+      .catch(done);
+    });
+    it('should respond with 401', (done) => {
+      let url = `${baseURL}/api/profile/123124`;
+      superagent.get(url)
+      .set('Authorization', `Bearer badtoken`)
+      .then(done)
+      .catch(res => {
+        expect(res.status).to.equal(401);
+        done();
+      })
+      .catch(done);
+    });
 
+    it('should respond with a 404', (done) => {
+      let url = `${baseURL}/api/fakeprofile`;
+      superagent.get(url)
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch(res => {
+        expect(res.status).to.equal(404);
+        done();
+      })
+      .catch(done);
+    });
+  });
+  describe('testing DELETE /api/profile', function(){
+    beforeEach(mockUser.bind(this));
+    beforeEach(mockProfile.bind(this));
+    beforeEach(mockPhoto.bind(this));
+
+    it('should delete a profile', (done) => {
+      superagent.delete(`${baseURL}/api/profile/${this.tempPhoto._id.toString()}`)
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(res => {
+        expect(res.status).to.equal(204);
+        done();
+      })
+      .catch(done);
+    });
+    it('should respond with a 401', done => {
+      superagent.delete(`${baseURL}/api/profile/${this.tempPhoto._id.toString()}`)
+      .set('Authorization', `Bearer badtoken`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(401);
+        done();
+      })
+      .catch(done);
+    });
+
+    it('should respond with a 404', done => {
+      superagent.delete(`${baseURL}/api/profile/fakeID`)
+      .set('Authorization', `Bearer ${this.tempToken}`)
+      .then(done)
+      .catch(err => {
+        expect(err.status).to.equal(404);
+        done();
+      })
+      .catch(done);
+    });
+  });
   describe('testing GET /api/profile/:id', function(){
-    before(mockUser.bind(this));
-    before(mockProfile.bind(this));
-    before(mockPhoto.bind(this));
+    beforeEach(mockUser.bind(this));
+    beforeEach(mockProfile.bind(this));
+    beforeEach(mockPhoto.bind(this));
 
     it('should respond with a profile', (done) => {
       let url = `${baseURL}/api/profile/${this.tempProfile._id.toString()}`;
@@ -59,7 +128,7 @@ describe('testing profile_router', function(){
       .catch(done);
     });
     it('should respond with 401', (done) => {
-      let url = `${baseURL}/api/profile/${this.tempProfile._id.toString()}`;
+      let url = `${baseURL}/api/profile/1234}`;
       superagent.get(url)
       .set('Authorization', `Bearer badtoken`)
       .then(done)

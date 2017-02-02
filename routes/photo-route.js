@@ -6,7 +6,7 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 const Router = require('express').Router;
 const debug = require('debug')('goaltastic:photo-route');
-
+const createError = require('http-errors');
 const Profile = require('../model/profile');
 const Photo = require('../model/photo');
 const bearerAuth = require('../lib/bear-auth');
@@ -26,6 +26,7 @@ function s3Upload(params) {
 
 photoRouter.post('/api/photos', bearerAuth, upload.single('file'), function(req, res, next) {
   debug('POST /api/photos');
+  
   Profile.findOne({_id: req.body.profileID, userID: req.user_id})
   .then(() => {
     return s3Upload({
@@ -47,13 +48,21 @@ photoRouter.post('/api/photos', bearerAuth, upload.single('file'), function(req,
 .then(photo => res.json(photo))
 .catch(next);
 });
-
+photoRouter.get('/api/photos/:id', bearerAuth, function(req, res, next) {
+  debug('GET /api/photos/:id');
+  Photo.findOne({
+    userID: req.user._id.toString(),
+    _id: req.params.id,
+  })
+  .then(photo => res.json(photo))
+  .catch(() => next(createError(404, 'didn\'t find the photos')));
+});
 photoRouter.delete('/api/photos/:id', bearerAuth, function(req, res, next) {
   debug('DELETE /api/photos/:id');
   Photo.findOneAndRemove({
     userID: req.user._id.toString(),
     _id: req.params.id,
   })
-  .then(() => next())
-  .catch(next);
+  .then(() => res.sendStatus(204))
+  .catch(() => next(createError(404, 'didn\'t find the gallery to remove')));
 });

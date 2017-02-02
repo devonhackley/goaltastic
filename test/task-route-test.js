@@ -24,9 +24,8 @@ describe('testing task_router', function(){
   describe('testing POST /api/tasks', function(){
     before(userMocks.bind(this));
     before(goalMocks.bind(this));
-    // before(taskMocks.bind(this));
-    it('should respond with a tasks', (done) => {
 
+    it('should respond with a tasks', (done) => {
       superagent.post(`${baseURL}/api/tasks`)
       .send({ title:'example tasks', completion: false, goalID: this.tempGoal._id.toString() })
       .set('Authorization', `Bearer ${this.tempToken}`)
@@ -39,6 +38,7 @@ describe('testing task_router', function(){
       })
       .catch(done);
     });
+
     it('test 401, when no task header is provided', (done) => {
       superagent.post(`${baseURL}/api/tasks `)
       .send({title: 'example tasks',  completion: false })
@@ -64,6 +64,17 @@ describe('testing task_router', function(){
       .catch(done);
     });
   });
+  it('should respond with a 404 with bad url', (done) => {
+    let url = `${baseURL}/api/faketask`;
+    superagent.get(url)
+    .set('Authorization', `Bearer ${this.tempToken}`)
+    .then(done)
+    .catch(res => {
+      expect(res.status).to.equal(404);
+      done();
+    })
+    .catch(done);
+  });
 
   describe('testing GET /api/tasks/:id', function(){
     beforeEach(userMocks.bind(this));
@@ -76,6 +87,7 @@ describe('testing task_router', function(){
       superagent.get(url)
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
+        expect(res.status).to.equal(200);
         expect(res.body.title).to.equal(this.tempTask.title);
         expect(res.body.completion).to.equal(false);
         expect(res.body.goalID).to.equal(this.tempGoal._id.toString());

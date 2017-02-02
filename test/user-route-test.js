@@ -33,21 +33,41 @@ describe('Testing user model', function(){
       })
       .catch(done);
     });
-  });
-  
-
-  describe('Testing DELETE /api/user/:id', function(){
-    before(userMocks.bind(this));
-
-    it('should return a user', (done) => {
-      superagent.delete(`${baseURL}/api/user/${this.tempUser._id.toString()}`)
-      .set('Authorization', `Bearer ${this.tempToken}`)
-      .then((res) => {
-        expect(res.status).to.equal(204);
+    it('test 404, when no user header is provided', (done) => {
+      let url = `${baseURL}/api/users/${this.tempUser._id.toString()}`;
+      superagent.get(url)
+      .set('Authorization', `Bearer badtoken`)
+      .then(done)
+      .catch(res => {
+        expect(res.status).to.equal(404);
         done();
       })
       .catch(done);
     });
-  });
 
+    describe('Testing DELETE /api/user/:id', function(){
+      before(userMocks.bind(this));
+
+      it('should return a user', (done) => {
+        superagent.delete(`${baseURL}/api/user/${this.tempUser._id.toString()}`)
+        .set('Authorization', `Bearer ${this.tempToken}`)
+        .then((res) => {
+          expect(res.status).to.equal(204);
+          done();
+        })
+        .catch(done);
+      });
+      it('should respond with a 404', (done) => {
+        let url = `${baseURL}/api/user/fakeID`;
+        superagent.delete(url)
+        .set('Authorization', `Bearer ${this.tempToken}`)
+        .then(done)
+        .catch(res => {
+          expect(res.status).to.equal(404);
+          done();
+        })
+        .catch(done);
+      });
+    });
+  });
 });
