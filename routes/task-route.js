@@ -26,7 +26,6 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
 
 taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   debug('GET /api/tasks/:id');
-  Twilobot(req, res, next);
   Task.findOne({
     // taskID: req.body._id.toString(),
     _id: req.params.id,
@@ -35,11 +34,6 @@ taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   .catch(err => {
     if(err) return next(createError(404, 'didn\'t find the task'));
   });
-});
-
-taskRouter.get('/api/tasks/text/:id', bearerAuth, function(req,res,next){
-  debug('GET /api/tasks/:id');
-  Twilobot(req, res, next);
 });
 
 
