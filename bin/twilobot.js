@@ -47,5 +47,3 @@ twilobot((err,message) => {
   if(err) return console.error(err);
   console.log(message);
 });
-
-//find tasks that are false, if they are false, turn them true
