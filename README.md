@@ -1,4 +1,5 @@
 # Goaltastic
+[![NPM version](http://img.shields.io/npm/v/goaltastic.svg)](https://www.npmjs.com/package/goaltastic)
 [![Build Status](https://travis-ci.org/devonhackley/goaltastic.svg?branch=master)](https://travis-ci.org/devonhackley/goaltastic)
 
 ## Description
