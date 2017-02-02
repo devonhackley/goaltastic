@@ -1,4 +1,5 @@
 # Goaltastic
+[![Build Status](https://travis-ci.org/devonhackley/goaltastic.svg?branch=master)](https://travis-ci.org/devonhackley/goaltastic)
 
 ## Description
 A REST API for where users can make **POST**, **GET**, **PUT**, and **DELETE** requests to `/api/users` This lab we use **MongoDB** with **Mongoose.js**.
