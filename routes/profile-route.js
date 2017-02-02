@@ -39,6 +39,6 @@ profileRouter.delete('/api/profile/:id', bearerAuth, function(req, res, next) {
     userID: req.user._id.toString(),
     _id: req.params.id,
   })
-  .then(() => res.sendStatus(204))
- .catch(next);
+  .then(() => res.status(204).send())
+  .catch(() => next(createError(404, 'didn\'t find the gallery to remove')));
 });
