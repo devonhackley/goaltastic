@@ -2,7 +2,6 @@
 .env
 db
 
-
 ### Node ###
 # Logs
 logs
