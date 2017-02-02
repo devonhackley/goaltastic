@@ -27,7 +27,6 @@ taskRouter.post('/api/tasks', bearerAuth, jsonParser,  function(req, res, next){
 taskRouter.get('/api/tasks/:id', bearerAuth, function(req, res, next){
   debug('GET /api/tasks/:id');
   Task.findOne({
-    // taskID: req.body._id.toString(),
     _id: req.params.id,
   })
   .then(task => res.json(task))

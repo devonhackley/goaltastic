@@ -27,7 +27,7 @@ describe('testing task_router', function(){
 
     it('should respond with a tasks', (done) => {
       superagent.post(`${baseURL}/api/tasks`)
-      .send({ title:'example tasks', completion: false, goalID: this.tempGoal._id.toString() })
+      .send({ title:'example tasks', completion: false, userID: this.tempUser._id.toString(), goalID: this.tempGoal._id.toString() })
       .set('Authorization', `Bearer ${this.tempToken}`)
       .then(res => {
         expect(res.status).to.equal(200);
