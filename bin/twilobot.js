@@ -32,7 +32,7 @@ const twilobot = module.exports = function (callback) {
 
 function sendText(phone, message, callback){
   client.messages.create({
-    to: 2066592953,
+    to: phone,
     from: process.env.TWILIO_NUMBER,
     body: message,
   }, function(err, message) {

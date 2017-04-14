@@ -2,14 +2,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/devonhackley/goaltastic/badge.svg?branch=master)](https://coveralls.io/github/devonhackley/goaltastic?branch=master) [![Build Status](https://travis-ci.org/devonhackley/goaltastic.svg?branch=master)](https://travis-ci.org/devonhackley/goaltastic)
 
 ## Description
-A REST API for where users can make **POST**, **GET**, **PUT**, and **DELETE** requests to `/api/users` This lab we use **MongoDB** with **Mongoose.js**.
+A REST API for where users can make **POST**, **GET**, **PUT**, and **DELETE** requests to `/api/users` This project we use **MongoDB** with **Mongoose.js**.
 
 ## App directory
 - db directory (for MongoDB to create collection and documents)
 - lib directory (empty)
 - model directory (user.js, goal.js, milestone.js, task.js)
 - node_modules (Once you npm install this will be created)
-- routes (user-route.js , goal-route.js, task-route.js, milestone-route.js) - this is for operations of CRUD)
+- routes (user-route.js , goal-route.js, task-route.js, photo-route.js, profile-route.js) - this is for operations of CRUD)
 - test (mock-env.js - for mock environment variables, user-route-test.js, milestone-route-test.js, task-route-test.js, goal-route-test.js - Mocha and Chai are used to test and expect results using our applications resources)
 - **server.js** -- starts the server and creates an instance of a router for the superheroes API
 
